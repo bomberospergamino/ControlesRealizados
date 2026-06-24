@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Seguimiento de Checks SBVP</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="app-header">
+    <div class="brand-block">
+      <img class="brand-logo" src="logo-sbvp.png" alt="Logo Bomberos Voluntarios Pergamino" />
+      <div>
+        <p class="eyebrow">Bomberos Voluntarios Pergamino</p>
+        <h1>Checks realizados</h1>
+      </div>
+    </div>
+    <button id="btnRefresh" class="btn secondary" type="button">Actualizar</button>
+  </header>
+
+  <main class="layout">
+    <section id="configPanel" class="panel config-panel">
+      <h2>Conexion</h2>
+      <p>Usa la URL publicada del Apps Script de equipamiento. El tablero lee la hoja REGISTROS.</p>
+      <label for="scriptUrl">URL Apps Script</label>
+      <input id="scriptUrl" type="url" placeholder="https://script.google.com/macros/s/.../exec" />
+      <button id="saveConfig" class="btn primary" type="button">Guardar conexion</button>
+    </section>
+
+    <section class="summary-strip" aria-label="Resumen de checks">
+      <article class="summary-card">
+        <span>Ultimos 7 dias</span>
+        <strong id="doneCount">0</strong>
+      </article>
+      <article class="summary-card accent">
+        <span>Periodo</span>
+        <strong id="weekCount">7d</strong>
+      </article>
+    </section>
+
+    <section class="panel board-head">
+      <h2>Pizarra semanal</h2>
+      <p id="updatedAt">Sin actualizar.</p>
+    </section>
+
+    <section id="checksList" class="checks-list" aria-live="polite"></section>
+  </main>
+
+  <div id="toast" class="toast hidden"></div>
+  <script src="app.js"></script>
+</body>
+</html>
