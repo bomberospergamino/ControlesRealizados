@@ -34,13 +34,18 @@ El historico incluido queda guardado en el navegador durante 60 dias. Para que e
 
 ## Escritura en CONTROL_FIRMAS
 
-Para que los checks de firmas se registren en la hoja `CONTROL_FIRMAS`:
+Para que los checks de firmas se registren en la hoja `CONTROL_FIRMAS`, usar el Apps Script combinado del proyecto de carga de servicios:
 
-1. Abrir la planilla de Google.
-2. Ir a `Extensiones > Apps Script`.
-3. Pegar el contenido de `apps-script-control-firmas.gs`.
-4. Implementar como aplicacion web con acceso para quien use el control.
-5. Copiar la URL de la aplicacion web.
-6. Pegar esa URL en `app.js`, en `CONFIG.appsScriptUrl`.
+`C:\Users\irina\Desktop\HTML\SBVP_CARGA DE SERVICIOS\apps-script.gs`
+
+Ese archivo ya contiene las acciones de carga de servicios y tambien acepta `updateSignature` para actualizar `CONTROL_FIRMAS`.
+
+Pasos:
+
+1. Abrir el proyecto de Apps Script que usa `SBVP_CARGA DE SERVICIOS`.
+2. Reemplazar/actualizar ahi el contenido con `apps-script.gs`.
+3. Implementar una nueva version como aplicacion web.
+4. Copiar la URL de la aplicacion web.
+5. Pegar esa URL en `app.js`, en `CONFIG.appsScriptUrl`.
 
 Si `CONFIG.appsScriptUrl` queda vacio, la app guarda las firmas localmente como pendientes y avisa en pantalla.
