@@ -1,22 +1,46 @@
-# Seguimiento de Checks SBVP
+# SBVP Control Diario
 
-Pizarra movil para ver que checks de equipamiento fueron realizados en los ultimos 7 dias y cuales quedan pendientes.
+Aplicacion web estatica para realizar el control diario de guardia:
 
-## Encabezados esperados en REGISTROS
+- Limpieza de lugares.
+- Limpieza de moviles.
+- Asistencia de personas.
+- Control de partes sin firmar desde la hoja `CONTROL_FIRMAS`.
+- Generacion de PDF al finalizar.
+- Compartir desde el navegador si el dispositivo soporta Web Share.
+- Historico local con retencion automatica de 60 dias.
 
-Segun el repo `SBVP_ EQUIPAMIENTO V2`, la hoja `REGISTROS` se crea con estos encabezados:
+## Datos
 
-`Fecha carga`, `Fecha control`, `Actividad`, `Responsable/s`, `Observaciones`, `PDF`, `Total items`, `Total novedades`
+La app lee el personal y los partes desde esta planilla:
 
-No pude leer la hoja directamente por URL publica porque Google devuelve `401 No autorizado`. El Apps Script si puede leerla porque usa permisos del archivo.
+`https://docs.google.com/spreadsheets/d/1fkfiSwjaFuysUVHaTTaHziDee0Atmrpo-cbH_iqrCuw`
 
-## Uso
+GIDs usados:
 
-1. Si queres una Web App nueva, publicar Apps Script con el contenido de `Code.gs`.
-2. Si queres usar la Web App actual de equipamiento, agregar lo indicado en `apps-script-existing-project-snippet.gs` al Apps Script existente y volver a implementar.
-3. Abrir `index.html` desde el celular o publicarlo como sitio estatico.
-4. Si se usa otra Web App, pegar la URL en el panel de conexion.
+- Personal: `0`
+- CONTROL_FIRMAS: `1632175139`
 
-El front llama a:
+## Publicacion en GitHub Pages
 
-`?action=checksSummary&days=7`
+1. Crear un repositorio en GitHub.
+2. Subir estos archivos a la rama principal.
+3. En GitHub, ir a `Settings > Pages`.
+4. Elegir la rama principal y carpeta raiz.
+
+## Nota sobre historico central
+
+El historico incluido queda guardado en el navegador durante 60 dias. Para que el historico quede centralizado en Google Sheets, conviene sumar un endpoint de Google Apps Script que reciba el control finalizado y lo escriba en una hoja `HISTORICO_CONTROL_DIARIO`.
+
+## Escritura en CONTROL_FIRMAS
+
+Para que los checks de firmas se registren en la hoja `CONTROL_FIRMAS`:
+
+1. Abrir la planilla de Google.
+2. Ir a `Extensiones > Apps Script`.
+3. Pegar el contenido de `apps-script-control-firmas.gs`.
+4. Implementar como aplicacion web con acceso para quien use el control.
+5. Copiar la URL de la aplicacion web.
+6. Pegar esa URL en `app.js`, en `CONFIG.appsScriptUrl`.
+
+Si `CONFIG.appsScriptUrl` queda vacio, la app guarda las firmas localmente como pendientes y avisa en pantalla.
